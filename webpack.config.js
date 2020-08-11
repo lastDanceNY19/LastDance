@@ -7,7 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, './src/build'),
     filename: 'bundle.js',
   },
-  mode: 'production',
+  mode:  process.env.NODE_ENV,
   devServer: {
     publicPath: 'http://localhost:8080/build/',
     proxy: {
