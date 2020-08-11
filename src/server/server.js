@@ -8,7 +8,7 @@ const PORT = 3000;
 if (process.env.NODE_ENV = 'production') {
   app.use('/build', express.static(path1.join(__dirname, '../build')));
   // serve index.html on the route '/'
-  app.get('/', (req: any, res: any) => {
+  app.get('/', (req, res) => {
     res.sendFile(path1.join(__dirname, '../build/index.html'));
   });
 };
