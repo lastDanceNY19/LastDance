@@ -1,31 +1,16 @@
 const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
+const path1 = require('path');
+
 const app = express();
 const PORT = 3000;
 
 // Development
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-app.use('/', express.static(path.join(__dirname,'../dist')))
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
-});
-
-app.post('/createUser', (req, res) => {
-  res.sendStatus(200)
-})
-
-app.post('/login', (req, res) => {
-  res.sendStatus(200)
-})
-
-app.post('/getPipeline', (req, res) => {
-  res.sendStatus(200)
-})
-
+if (process.env.NODE_ENV = 'production') {
+  app.use('/build', express.static(path1.join(__dirname, '../build')));
+  // serve index.html on the route '/'
+  app.get('/', (req, res) => {
+    res.sendFile(path1.join(__dirname, '../build/index.html'));
+  });
+};
 
 app.listen(PORT, () => console.log('itworks'));
