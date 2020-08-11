@@ -1,26 +1,26 @@
 const path = require('path');
-// const MinifyPlugin = require("babel-minify-webpack-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   entry: './src/client/index.tsx',
   output: {
+    path: path.resolve(__dirname, './src/dist'),
     filename: 'bundle.js',
-    path: path.resolve(__dirname, './src/build'),
   },
-  mode: process.env.NODE_ENV,
+  mode: 'production',
   devServer: {
-    publicPath: 'http://localhost:8080/build/',
+    publicPath: 'http://localhost:8080/dist/',
     proxy: {
       '/': {
         target: 'http://localhost:3000/',
       },
-    },
-    hot: true,
+    }
   },
   module: {
     rules: [
       {
-        test: /\.tsx?/,
-        exclude: path.resolve(__dirname, 'node_modules/'),
+        test: /\.tsx?$/,
+        exclude:  /node_modules/,
         use: 'ts-loader',
       },
       {
@@ -32,5 +32,5 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
-  },
+  }
 };

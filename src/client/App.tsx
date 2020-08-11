@@ -1,9 +1,9 @@
 import React from 'react';
 
-const App: React.FC = () => {
+export const App = () => {
   return(
     <div>
-      <h1>Hi</h1>
+      <h1>Sometimes webpacksucks</h1>
     </div>
   );
 };
