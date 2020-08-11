@@ -1,9 +1,10 @@
 import React from 'react';
+import Container from './Container'
 
 export const App = () => {
   return(
     <div>
-      <h1>Sometimes webpacksucks</h1>
+      <Container />
     </div>
   );
 };
