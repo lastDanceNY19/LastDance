@@ -6,7 +6,7 @@ export const Group = () => {
     <div>
         <h1>Name of Group</h1>
         <h1>% of Acceptance</h1>
-        <button>Join</button>
+        <button>Join</button> 
     </div>
   );
 };

@@ -4,8 +4,7 @@ import Group from './Group'
 export const Groups = () => {
   return(
     <div>
-        Groups
-        <Group />
+        <Group/>
     </div>
   );
 };

@@ -6,16 +6,10 @@
     "test": "tests"
   },
   "scripts": {
-<<<<<<< HEAD
-    "build": "webpack",
-    "dev": "concurrently \"webpack-dev-server --open\"  \"node src/server/server.js\"",
-    "start": "concurrently \"tsc\" \"node src/server/server.ts\""
-=======
     "tsc": "tsc",
     "build": "NODE_ENV=production webpack",
     "dev": "concurrently \"NODE_ENV=development webpack-dev-server --open\"  \"node src/server/server.js\"",
     "start": "node src/server/server.js"
->>>>>>> fc525733927fc17dba7ef53aa4470d14d020fcb4
   },
   "repository": {
     "type": "git",
