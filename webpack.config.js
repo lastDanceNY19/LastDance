@@ -4,12 +4,12 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './src/client/index.tsx',
   output: {
-    path: path.resolve(__dirname, './src/dist'),
+    path: path.resolve(__dirname, './src/build'),
     filename: 'bundle.js',
   },
   mode: 'production',
   devServer: {
-    publicPath: 'http://localhost:8080/dist/',
+    publicPath: 'http://localhost:8080/build/',
     proxy: {
       '/': {
         target: 'http://localhost:3000/',
