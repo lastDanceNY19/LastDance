@@ -4,18 +4,17 @@ import Groups from './components/Groups'
 import { connect} from 'react-redux'
 
 export const Container = (props: any) => {
+  
 
   return(
     <div>
-      <div>
-      <h1>{props.title}</h1>
+      <div className='navbar'>
         <h1>Number of Jobs Applied: 'insert num off of redux store' </h1>
         <h1>Job Offers: 'insert num off of redux store' </h1>
+        <div>Hi 'insert user' testing</div>
       </div>
 
-      <div>Hi 'insert user' testing</div>
-
-      <div className='main-container-2'>
+      <div className='main-container'>
         <Pipeline />
         <Groups />
       </div>

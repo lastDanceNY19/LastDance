@@ -29,6 +29,8 @@ function reducer(state = defaultState, action){
         ...state,
         jobs: jobList
       }
+      case"ADD_EVENT":
+        console.log('Adding Event!')
       default: return state
   }
 }

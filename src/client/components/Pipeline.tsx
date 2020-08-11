@@ -25,10 +25,8 @@ export const Pipeline: React.FC = (props: any) => {
         </form>
 
         {props.jobs.map((el:any) => (
-          <Job company={el.company}/>
+          <Job company={el.company} events={el.events}/>
         ))}
-       
-     
     </div>
   );
 };
