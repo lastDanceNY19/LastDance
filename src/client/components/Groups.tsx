@@ -1,10 +1,11 @@
 import React from 'react';
-
+import Group from './Group'
 
 export const Groups = () => {
   return(
     <div>
-        test
+        Groups
+        <Group />
     </div>
   );
 };
