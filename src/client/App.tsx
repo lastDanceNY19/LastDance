@@ -1,9 +1,10 @@
 import React from 'react';
+import Container from './Container'
 
 const App: React.FC = () => {
   return(
     <div>
-      <h1>Hello</h1>
+      <Container />
     </div>
   );
 };
