@@ -1,16 +1,39 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { Link, useHistory } from "react-router-dom";
+import '../styles/signup.scss';
+const axios = require('axios');
 
+export const signUp = (props: any) => {
+  
+  const history = useHistory();
+  const username = useRef(null);
+  const password = useRef(null);
+  let errorMessage = '';
 
-export const Signup = (props: any) => {
+  async function handleSubmitButton(e: any) {
+    e.preventDefault();
 
+    let result = await axios.post('/login', {
+      username: username.current.value,
+      password: password.current.value,
+    }).catch((error: any) => console.log('error ', error))
 
+    if (!result.data.auth) errorMessage = 'Sorry, invalid username or password';
+    else history.push('/pipeline');
+  };
 
-  return(
-    <div>
-      <h1>This is the sign up page!</h1>
-        <button>Signup!</button>
+  return (
+    <div className='Signup'>
+        <form>
+          <label>Username</label>
+          <input type="text" ref={username}></input>
+          <label>Password</label>
+          <input type="text" ref={password}></input>
+          <button onClick={handleSubmitButton}>Submit</button> 
+          <div>{errorMessage}</div>
+        </form>
     </div>
   );
 };
 
-export default Signup;
+export default signUp;

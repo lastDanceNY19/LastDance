@@ -17,7 +17,6 @@ const App: React.FC = () => {
   return(
     <Router>
      
-
       <Switch>
       <Route path="/pipeline">
           <Container />
@@ -34,7 +33,6 @@ const App: React.FC = () => {
 
       </Switch>
     
-
     </Router>
   );
 };
