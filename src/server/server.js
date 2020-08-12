@@ -51,7 +51,7 @@ app.post('/add_event', userController.addEvent, (req, res) => {
 
 // Add application
 app.post('/add_application', userController.addApplication, (req, res) => {
-  let file = fs.readFileSync('db.json');
+  let file = fs.readFileSync(path.join(__dirname, 'db.json'));
   console.log("file is ", JSON.parse(file));
   let obj = JSON.parse(file);
   obj.applications.push({ 
@@ -60,7 +60,9 @@ app.post('/add_application', userController.addApplication, (req, res) => {
     status: true
   });
   let str = JSON.stringify(obj);
-  fs.writeFile(str);
+  fs.writeFile(path.join(__dirname, 'db.json'), str, (error) => {
+    if (error) console.log('error ', error);
+  })
   res.send('wrote new app to db');
 });
 
