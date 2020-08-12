@@ -51,7 +51,7 @@ export const Pipeline: React.FC = (props: any) => {
 
         <form onSubmit={(e) => {
           e.preventDefault()
-          // form input
+          
           let company = nameEl.current.value
 
           addApp(company)

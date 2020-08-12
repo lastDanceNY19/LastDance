@@ -4,39 +4,23 @@ const axios = require('axios');
 
 export const Login = (props: any) => {
   const history = useHistory();
-
   const username = useRef(null);
   const password = useRef(null);
+  let errorMessage = '';
 
-  function handleSubmitButton(e: any) {
-    console.log("call to submit button ")
+  async function handleSubmitButton(e: any) {
     e.preventDefault();
 
-    // let result = await fetch('/login', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ body: {username: username, password: password}}),
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   }
-    // }).then((response) => response.json())
-    //   .catch((error) => console.log("error verifying user ", error))
-    
-    let userNameOut: any = username.current.value;
+    let result = await axios.post('/login', {
+      username: username.current.value,
+      password: password.current.value,
+    }).catch((error: any) => console.log('error ', error))
 
-    axios.post('/login', {
-      Username: userNameOut,
-    }).then((response: any) => console.log("response ", response))
-      .catch((error: any) => console.log('error ', error))
-
+    if (!result.data.auth) errorMessage = 'Sorry, invalid username or password';
+    else history.push('/pipeline');
   };
 
-
-    // if (result) history.push('/pipeline');
-    // else console.log('could not verify user ');
-
-
-  return(
+  return (
     <div>
         <form>
           <label>Username</label>
@@ -44,6 +28,7 @@ export const Login = (props: any) => {
           <label>Password</label>
           <input type="text" ref={password}></input>
           <button onClick={handleSubmitButton}>Submit</button> 
+          <div>{errorMessage}</div>
         </form>
     </div>
   );

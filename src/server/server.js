@@ -25,9 +25,9 @@ app.post('/create_user', userController.createUser, (req, res) => {
 
 // Authenticate user
 app.post('/login', (req, res) => {
-  console.log('req.body is ', req.body)
-  let obj = [{company: 'Amazon', events: ['phone screen 7/15'], status: true}];
-  return res.status(200).json(obj)
+  console.log('req.body is ', req.body);
+  if (req.body.username === 'username') return res.status(200).json({auth: {user: true}});
+  else return res.status(200).json({body: {auth: false}})
 });
 
 // Retrieve pipeline
