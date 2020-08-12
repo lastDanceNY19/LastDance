@@ -1,15 +1,57 @@
-import React , { useEffect, useState } from 'react';
+import React , { useEffect, useState, useRef } from 'react';
 import Job from './Job';
+import { connect, useSelector, useDispatch} from 'react-redux'
+import getPipeline from '../reducers/reducer'
 
-export const Pipeline = () => {
+import * as actions from '../actions/actions';
+
+export const Pipeline: React.FC = (props: any) => {
+  const nameEl = useRef(null)
+  const dispatch = useDispatch()
+  // useEffect(() => {
+  //   dispatch(getPipeline())
+  // },[])
+
   return(
     <div>
-        <button  >Pipeline</button> 
-        <button  >History</button> 
+        <button>Pipeline</button> 
+        <button>History</button> 
 
-        <Job/>
+        <form onSubmit={(e) => {
+          e.preventDefault()
+          let company = nameEl.current.value
+          let userId = 1
+          props.addJob(userId, company)
+        }}>
+          <label>Company Name: </label>
+          <input type="text" ref={nameEl}></input>
+          <button type='submit'>Add Application</button>
+        </form>
+
+        {props.jobs.map((el:any) => (
+          <Job company={el.company} events={el.events}/>
+        ))}
     </div>
   );
 };
 
-export default Pipeline;
+const mapStateToProps = (state: any) => {
+  console.log(state, 'state')
+  return {
+    jobs: state.jobs
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    addJob: (e: any, company: any) => {
+      dispatch(actions.addJob(e, company))
+    }
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pipeline);
+
+
+

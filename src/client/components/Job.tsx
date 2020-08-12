@@ -1,13 +1,13 @@
 import React from 'react';
+import { connect} from 'react-redux'
+import * as actions from '../actions/actions';
 
-
-export const Job = () => {
+export const Job = (props: any) => {
   return(
     <div>
         <div>
-          <h1> Amazon </h1>
-          <h1> Phone Screen 7/3 </h1>
-          <h1> Tech Interview 7/8 </h1>
+          <h1>{props.company} </h1>
+          <h1>Events {props.events }</h1>
         </div>
 
         <button> Add Event </button>
@@ -17,4 +17,16 @@ export const Job = () => {
   );
 };
 
-export default Job;
+
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    addJob: (e: any, company: any) => {
+      dispatch(actions.addJob(e, company))
+    }
+  }
+}
+
+
+export default connect(mapDispatchToProps)(Job);
+

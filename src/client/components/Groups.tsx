@@ -1,12 +1,21 @@
 import React from 'react';
 import Group from './Group'
+import { connect} from 'react-redux'
 
-export const Groups = () => {
+export const Groups = (props: any) => {
   return(
     <div>
-        <Group/>
+        {props.groups.map((el:any) => (
+          <Group group={el.name} users={el.users}/>
+        ))}
     </div>
   );
 };
 
-export default Groups;
+const mapStateToProps = (state: any) => {
+  return {
+    groups: state.groups
+  }
+}
+
+export default connect(mapStateToProps)(Groups);

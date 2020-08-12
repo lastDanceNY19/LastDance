@@ -30,4 +30,4 @@ groupsController.joinGroup = (req, res, next) => {
   });
 };
 
-module.exports(groupsController);
+module.exports = groupsController;

@@ -1,0 +1,7 @@
+.main-container {
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-between;
+  margin: auto;
+  max-width: 80%;
+}

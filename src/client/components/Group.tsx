@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-export const Group = () => {
+export const Group = (props: any) => {
   return(
     <div>
-        <h1>Name of Group</h1>
-        <h1>% of Acceptance</h1>
+        <h1>{props.group}</h1>
+        <h1>{props.users}</h1>
         <button>Join</button> 
     </div>
   );
