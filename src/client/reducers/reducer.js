@@ -3,8 +3,9 @@ import * as actions from '../actions/actions';
 
 
 const defaultState = {
-  jobs: [{company: 'Amazon', events: ['phone screen 7/3'], status: true}],
-  groups: [{name: 'cohort 19', users: 10},{name: 'App Academy', users: 15}],
+  // jobs: [{company: 'Amazon', events: ['phone screen 7/3'], status: true}],
+  jobs: [],
+  groups: [],
   title: 'Test App'
 }
 
@@ -30,10 +31,16 @@ function reducer(state = defaultState, action){
         ...state,
         jobs: jobList
       }
+      
       case"ADD_EVENT":
         console.log('Adding Event!')
+
       case "SET_PIPELINE": {
         return {...state, jobs: action.payload}
+      }
+
+      case "SET_GROUPS": {
+        return {...state, groups: action.payload}
       }
 
       default: return state
@@ -55,6 +62,7 @@ export const addApplication = () => (dispatch, getState) => {
 }  
 
 export const getPipeline = () => async (dispatch, getState) => {
+  console.log('getting pipeline')
   const pipeline = await fetch('/get_pipeline').then(res => res.json())
   dispatch(actions.setPipeline(pipeline))
 }

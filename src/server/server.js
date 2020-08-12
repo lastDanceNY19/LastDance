@@ -7,6 +7,8 @@ const feedController = require('./controllers/feedController');
 const groupController = require('./controllers/groupController');
 const cookieController = require('./controllers/cookieController');
 
+const fs = require('fs');
+
 const app = express();
 const PORT = 3000;
 
@@ -29,11 +31,17 @@ app.post('/login', userController.login, (req, res) => {
 // Retrieve pipeline
 app.get('/get_pipeline', feedController.getPipeline, (req, res) => {
   // send pipeline information
+  let obj = [{company: 'Amazon', events: ['phone screen 7/15'], status: true}];
+
+  //  res.send(JSON.stringify(obj));
+  return res.status(200).json(obj)
 });
 
 // Retrieve group information
 app.get('/get_groups', feedController.getGroups, (req, res) => {
   // send group information
+  let obj = [{name:'NY19', users:['Joe','Bob', 'Bill']}];
+  return res.status(200).json(obj);
 });
 
 // Add event
@@ -43,7 +51,17 @@ app.post('/add_event', userController.addEvent, (req, res) => {
 
 // Add application
 app.post('/add_application', userController.addApplication, (req, res) => {
-  // add app
+  let file = fs.readFileSync('db.json');
+  console.log("file is ", JSON.parse(file));
+  let obj = JSON.parse(file);
+  obj.applications.push({ 
+    name: req.body.name,
+    events: [],
+    status: true
+  });
+  let str = JSON.stringify(obj);
+  fs.writeFile(str);
+  res.send('wrote new app to db');
 });
 
 // Join group

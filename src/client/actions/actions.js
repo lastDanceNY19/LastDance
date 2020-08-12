@@ -17,3 +17,8 @@ export const setPipeline = (pipeline) => ({
   type: 'SET_PIPELINE',
   payload: pipeline
 })
+
+export const setGroups = (pipeline) => ({
+  type: 'SET_GROUPS',
+  payload: pipeline
+})
