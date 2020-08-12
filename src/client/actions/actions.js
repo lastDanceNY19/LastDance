@@ -12,3 +12,8 @@ export const addEvent = (userId, companyName, event) => ({
   companyName: companyName,
   event: event
 })
+
+export const setPipeline = (pipeline) => ({
+  type: 'SET_PIPELINE',
+  payload: pipeline
+})

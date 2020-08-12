@@ -1,12 +1,16 @@
 import React , { useEffect, useState, useRef } from 'react';
 import Job from './Job';
-import { connect} from 'react-redux'
-
+import { connect, useSelector, useDispatch} from 'react-redux'
+import getPipeline from '../reducers/reducer'
 
 import * as actions from '../actions/actions';
 
 export const Pipeline: React.FC = (props: any) => {
   const nameEl = useRef(null)
+  const dispatch = useDispatch()
+  // useEffect(() => {
+  //   dispatch(getPipeline())
+  // },[])
 
   return(
     <div>
