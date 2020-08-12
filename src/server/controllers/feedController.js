@@ -30,4 +30,4 @@ feedController.getGroups = (req, res, next) => {
   });
 };
 
-module.exports(feedController);
+module.exports = feedController ;

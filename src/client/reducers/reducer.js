@@ -1,6 +1,4 @@
 
-
-
 const defaultState = {
   jobs: [{company: 'Amazon', events: ['phone screen 7/3'], status: true}],
   groups: [{name: 'cohort 19', users: 10},{name: 'App Academy', users: 15}],
