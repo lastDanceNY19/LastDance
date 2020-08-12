@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "/dist",
+    "outDir": "./client/build/",
     "noImplicitAny": true,
     "module": "es6",
     "moduleResolution": "node",

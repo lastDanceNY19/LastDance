@@ -14,13 +14,14 @@ module.exports = {
       '/': {
         target: 'http://localhost:3000/',
       },
-    }
+    },
+    hot: true
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        exclude:  /node_modules/,
+        exclude: path.resolve(__dirname, 'node_modules/'),
         use: 'ts-loader',
       },
       {
@@ -32,5 +33,5 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
-  }
+  },
 };
