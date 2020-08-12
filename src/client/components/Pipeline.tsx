@@ -20,7 +20,6 @@ export const Pipeline: React.FC = (props: any) => {
       })
       .catch(error => console.log("error ", error));
       
-      console.log('response from fetch req in Pipeline component ', response);
       // dispatch(getPipeline())
       dispatch(actions.setPipeline(response))
     }
@@ -45,7 +44,7 @@ export const Pipeline: React.FC = (props: any) => {
 
   // fire off the set_pipeline action 
 
-  return(
+  return (
     <div>
         <button>Pipeline</button> 
         <button>History</button> 
