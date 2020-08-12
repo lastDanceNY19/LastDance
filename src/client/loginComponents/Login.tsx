@@ -12,13 +12,13 @@ export const Login = (props: any) => {
   async function handleSubmitButton(e: any) {
     e.preventDefault();
 
-    await axios.post('/create_user', {
+    let result = await axios.post('/login', {
       username: username.current.value,
       password: password.current.value,
-    }).then(() => history.push('/pipeline'))
-      .catch((error: any) => { 
-        console.log('error ', error)
-      })
+    }).catch((error: any) => console.log('error ', error))
+
+    if (!result.data.auth) alert('Sorry, invalid username or password');
+    else history.push('/pipeline');
   };
 
   return (
@@ -29,6 +29,7 @@ export const Login = (props: any) => {
           <label>Password</label>
           <input type="text" ref={password}></input>
           <button onClick={handleSubmitButton}>Submit</button> 
+          {errorMessage}
         </form>
     </div>
   );

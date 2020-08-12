@@ -4,7 +4,7 @@ import '../styles/signup.scss';
 const axios = require('axios');
 
 export const signUp = (props: any) => {
-  
+
   const history = useHistory();
   const username = useRef(null);
   const password = useRef(null);
@@ -13,13 +13,13 @@ export const signUp = (props: any) => {
   async function handleSubmitButton(e: any) {
     e.preventDefault();
 
-    let result = await axios.post('/login', {
+    await axios.post('/create_user', {
       username: username.current.value,
       password: password.current.value,
-    }).catch((error: any) => console.log('error ', error))
-
-    if (!result.data.auth) errorMessage = 'Sorry, invalid username or password';
-    else history.push('/pipeline');
+    }).then(() => history.push('/pipeline'))
+      .catch((error: any) => { 
+        console.log('error ', error)
+      })
   };
 
   return (
@@ -29,8 +29,7 @@ export const signUp = (props: any) => {
           <input type="text" ref={username}></input>
           <label>Password</label>
           <input type="text" ref={password}></input>
-          <button onClick={handleSubmitButton}>Submit</button> 
-          <div>{errorMessage}</div>
+          <button onClick={handleSubmitButton}>Submit</button>
         </form>
     </div>
   );
