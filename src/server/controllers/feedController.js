@@ -3,10 +3,11 @@ const db = require('../models/userModel');
 const feedController = {};
 
 feedController.getPipeline = (req, res, next) => {
-  const { user_id } = req.query;
-  const retrievePipelineQuery = `SELECT company, active, steps FROM Pipeline WHERE user_id=${parseInt(user_id)};`;
+  const { userId } = req.query;
+  const retrievePipelineQuery = `SELECT company, active, steps FROM Pipeline WHERE user_id=$1;`;
+  const values = [userId];
 
-  db.query(retrievePipelineQuery, (err, data) => {
+  db.query(retrievePipelineQuery, values, (err, data) => {
     if (err) {
       throw new Error(err);
     } else {
@@ -19,9 +20,10 @@ feedController.getPipeline = (req, res, next) => {
 
 feedController.getGroups = (req, res, next) => {
   const { userId } = req.query;
-  const retrieveGroupsQuery = `SELECT "Group".name FROM "Group" LEFT JOIN User_Group ON _id=group_id WHERE user_id=${userId};`;
+  const retrieveGroupsQuery = `SELECT "Group".name FROM "Group" LEFT JOIN User_Group ON _id=group_id WHERE user_id=$1;`;
+  const values = [userId];
 
-  db.query(retrieveGroupsQuery, (err, data) => {
+  db.query(retrieveGroupsQuery, values, (err, data) => {
     if (err) {
       throw new Error(err);
     } else {
