@@ -1,19 +1,19 @@
-import React from "react";
-import Pipeline from "./components/Pipeline";
-import Groups from "./components/Groups";
-import { connect } from "react-redux";
+import React from 'react';
+import Pipeline from './components/Pipeline';
+import Groups from './components/Groups';
+import { connect } from 'react-redux';
 
 export const Container = (props: any) => {
   return (
     <div>
-      <div className="navbar">
+      <div className='navbar'>
         <h1>Number of Jobs Applied: 'insert num off of redux store' </h1>
         <h1>Job Offers: 'insert num off of redux store' </h1>
         <div>Hi 'insert user' testing</div>
       </div>
 
-      <div className="main-container">
-        <Pipeline userId={props.userId}/>
+      <div className='main-container'>
+        <Pipeline userId={props.userId} />
         <Groups />
       </div>
     </div>

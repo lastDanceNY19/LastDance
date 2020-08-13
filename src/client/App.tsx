@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import Container from "./Container";
+import React, { useState, useEffect } from 'react';
+import Container from './Container';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
   NavLink,
-} from "react-router-dom";
-import { login } from "../server/controllers/userController";
-import Login from "./loginComponents/Login";
-import Signup from "./loginComponents/Signup";
-import Main from "./Main";
+} from 'react-router-dom';
+import { login } from '../server/controllers/userController';
+import Login from './loginComponents/Login';
+import Signup from './loginComponents/Signup';
+import Main from './Main';
 
 const App: React.FC = () => {
   let [userId, setUserId] = useState(null);
@@ -22,16 +22,16 @@ const App: React.FC = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/pipeline">
+        <Route path='/pipeline'>
           <Container userId={userId} />
         </Route>
-        <Route path="/login">
+        <Route path='/login'>
           <Login updateUserId={updateUserId} />
         </Route>
-        <Route path="/signup">
+        <Route path='/signup'>
           <Signup updateUserId={updateUserId} />
         </Route>
-        <Route path="/">
+        <Route path='/'>
           <Main />
         </Route>
       </Switch>
