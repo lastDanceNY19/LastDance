@@ -4,9 +4,10 @@ const groupsController = {};
 
 groupsController.createGroup = (req, res, next) => {
   const { group, userId } = req.body;
-  const createGroupQuery = `INSERT INTO "Group" (name, admin) VALUES ('${group}', ${userId});`;
+  const createGroupQuery = `INSERT INTO "Group" (name, admin) VALUES ('$1', $2);`;
+  const values = [group, userId];
 
-  db.query(createGroupQuery, (err, data) => {
+  db.query(createGroupQuery, values, (err, data) => {
     if (err) {
       throw new Error(err);
     } else {
@@ -26,9 +27,10 @@ groupsController.createGroup = (req, res, next) => {
 
 groupsController.joinGroup = (req, res, next) => {
   const { userId, groupId } = req.body;
-  const joinGroupQuery = `INSERT INTO User_Group (user_id, group_id) VALUES (${userId}, ${groupId});`;
+  const joinGroupQuery = `INSERT INTO User_Group (user_id, group_id) VALUES ($1, $2);`;
+  const values = [userId, groupId];
 
-  db.query(joinGroupQuery, (err, data) => {
+  db.query(joinGroupQuery, values, (err, data) => {
     if (err) {
       throw new Error(err);
     } else {
