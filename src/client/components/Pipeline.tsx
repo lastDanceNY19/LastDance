@@ -13,12 +13,14 @@ export const Pipeline: React.FC = (props: any) => {
   // GETS DATA FROM BACKEND
   useEffect(() => {
     async function test() {
-      let response = await fetch('/get_pipeline')
+      let response = await fetch('/get_pipeline?userId=1')
         .then((res) => res.json())
         .then((data) => {
           return data;
         })
         .catch((error) => console.log('error ', error));
+
+      console.log(response, 'data');
 
       // SETS JOBS STATE (REDUX) TO THE DATA RECEIVED FROM BACKEND
       dispatch(actions.setPipeline(response));
