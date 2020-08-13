@@ -4,9 +4,10 @@ const userController = {};
 
 userController.createUser = (req, res, next) => {
   const { username, password } = req.body;
-  const registerQuery = `INSERT INTO "User"(username, password, num_apps, num_acceptances) VALUES ('${username}', '${password}', 0, 0);`;
+  const registerQuery = `INSERT INTO "User"(username, password, num_apps, num_acceptances) VALUES ('$1', '$2', 0, 0);`;
+  const values = [username, password];
 
-  db.query(registerQuery, (err, data) => {
+  db.query(registerQuery, values, (err, data) => {
     if (err) {
       throw new Error(err);
     } else {
@@ -18,9 +19,10 @@ userController.createUser = (req, res, next) => {
 
 userController.login = (req, res, next) => {
   const { username, password } = req.body;
-  const loginQuery = `SELECT * FROM "User" WHERE username='${username}' AND password='${password}';`;
+  const loginQuery = `SELECT * FROM "User" WHERE username='$1' AND password='$2';`;
+  const values = [username, password];
 
-  db.query(loginQuery, (err, data) => {
+  db.query(loginQuery, values, (err, data) => {
     if (err) {
       throw new Error(err);
     } else {
@@ -40,20 +42,11 @@ userController.login = (req, res, next) => {
 };
 
 userController.addEvent = (req, res, next) => {
-  /*
-  Expect req.body to look like:
-  {
-    "userId": 1,
-    "event": {
-      "phoneScreen": "July 24, 2020"
-    },
-    "company": "Amazon"
-  }
-  */
   const { userId, event, company } = req.body;
-  const addEventQuery = `SELECT steps FROM Pipeline WHERE user_id=${userId};`;
+  const addEventQuery = `SELECT steps FROM Pipeline WHERE user_id=$1;`;
+  const values = [userId];
 
-  db.query(addEventQuery, (err, data) => {
+  db.query(addEventQuery, values, (err, data) => {
     if (err) {
       throw new Error(err);
     } else {
@@ -64,9 +57,10 @@ userController.addEvent = (req, res, next) => {
 
       const eventsStringified = JSON.stringify(events);
 
-      const updateEventsQuery = `UPDATE Pipeline SET steps='${eventsStringified}' WHERE user_id=${user_id} AND company='${company}';`;
+      const updateEventsQuery = `UPDATE Pipeline SET steps='$1' WHERE user_id=$2 AND company='$3';`;
+      const updateEventsValues = [eventsStringified, userId, company];
 
-      db.query(updateEventsQuery, (err, data) => {
+      db.query(updateEventsQuery, updateEventsValue, (err, data) => {
         if (err) {
           throw new Error(err);
         } else {
@@ -80,9 +74,10 @@ userController.addEvent = (req, res, next) => {
 
 userController.addApplication = (req, res, next) => {
   const { userId, company } = req.body;
-  const addApplicationQuery = `INSERT INTO Pipeline (user_id, company, active, steps) VALUES (${userId}, '${company}', true, '[]');`;
+  const addApplicationQuery = `INSERT INTO Pipeline (user_id, company, active, steps) VALUES ($1, '$2', true, '[]');`;
+  const values = [userId, company];
 
-  db.query(addApplicationQuery, (err, data) => {
+  db.query(addApplicationQuery, values, (err, data) => {
     if (err) {
       throw new Error(err);
     } else {
