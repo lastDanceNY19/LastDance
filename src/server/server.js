@@ -31,7 +31,12 @@ app.post('/login', userController.login, (req, res) => {
 // Retrieve pipeline
 app.get('/get_pipeline', feedController.getPipeline, (req, res) => {
   // send pipeline information
-  let obj = [{company: 'Amazon', events: ['phone screen 7/15'], status: true}];
+  let obj = [{
+    company: 'Amazon',
+    events: ['phone screen 7/15'],
+    status: 'Accepted',
+    id: 9000
+  }];
 
   //  res.send(JSON.stringify(obj));
   return res.status(200).json(obj)
@@ -40,7 +45,10 @@ app.get('/get_pipeline', feedController.getPipeline, (req, res) => {
 // Retrieve group information
 app.get('/get_groups', feedController.getGroups, (req, res) => {
   // send group information
-  let obj = [{name:'NY19', users:['Joe','Bob', 'Bill']}];
+  let obj = [{
+    name: 'NY19',
+    users: ['Joe', 'Bob', 'Bill']
+  }];
   return res.status(200).json(obj);
 });
 
@@ -54,10 +62,10 @@ app.post('/add_application', userController.addApplication, (req, res) => {
   let file = fs.readFileSync(path.join(__dirname, 'db.json'));
   console.log("file is ", JSON.parse(file));
   let obj = JSON.parse(file);
-  obj.applications.push({ 
+  obj.applications.push({
     name: req.body.name,
     events: [],
-    status: true
+    status: 'pending'
   });
   let str = JSON.stringify(obj);
   fs.writeFile(path.join(__dirname, 'db.json'), str, (error) => {

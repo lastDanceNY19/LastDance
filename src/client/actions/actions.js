@@ -1,15 +1,11 @@
-
-
-export const addJob = (userId, companyName) => ({
+export const addJob = (companyName) => ({
   type: 'ADD_JOB',
-  payload: userId,
-  company: companyName
+  payload: companyName
 })
 
-export const addEvent = (userId, companyName, event) => ({
+export const addEvent = (jobId, event) => ({
   type: 'ADD_EVENT',
-  payload: userId,
-  companyName: companyName,
+  payload: jobId,
   event: event
 })
 

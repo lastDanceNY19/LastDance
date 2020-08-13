@@ -1,21 +1,21 @@
 import React from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom';
 
 export const Main = (props: any) => {
   const history = useHistory();
 
-  function sendToSignup (){
-    history.push('/signup')
+  function sendToSignup() {
+    history.push('/signup');
   }
 
-  function sendToLogin (){
-    history.push('/login')
+  function sendToLogin() {
+    history.push('/login');
   }
 
-  return(
+  return (
     <div>
-        <button onClick={sendToSignup}>Signup</button>
-        <button onClick={sendToLogin}> Login</button>
+      <button onClick={sendToSignup}>Signup</button>
+      <button onClick={sendToLogin}> Login</button>
     </div>
   );
 };

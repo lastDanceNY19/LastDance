@@ -1,16 +1,16 @@
 import React from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom';
 
 export const Login = (props: any) => {
   const history = useHistory();
 
-  function handleLogin (){
-    history.push('/pipeline')
+  function handleLogin() {
+    history.push('/pipeline');
   }
 
-  return(
+  return (
     <div>
-        <button onClick={handleLogin}>Login!</button> 
+      <button onClick={handleLogin}>Login!</button>
     </div>
   );
 };
