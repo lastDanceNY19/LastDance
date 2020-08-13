@@ -15,8 +15,9 @@ export const Login = (props: any) => {
     let result = await axios.post('/login', {
       username: username.current.value,
       password: password.current.value,
-    }).catch((error: any) => console.log('error ', error))
-
+    }).then((response: any) => response)
+    .catch((error: any) => console.log('error ', error));
+    
     if (!result.data.auth) alert('Sorry, invalid username or password');
     else history.push('/pipeline');
   };
