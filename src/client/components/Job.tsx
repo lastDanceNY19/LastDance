@@ -2,11 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 
 import { connect, useSelector, useDispatch } from 'react-redux';
 import * as actions from '../actions/actions';
+import e from 'express';
 
 export const Job = (props: any) => {
   const eventEl = useRef(null);
   function openForm() {}
-
 
   function onAccept() {
     props.addEvent(props.id, '', 'Accepted');
@@ -20,7 +20,8 @@ export const Job = (props: any) => {
     <div>
       <div>
         <h1>{props.company} </h1>
-        <h1>Events {props.events}</h1>
+        {console.log(props.events)}
+  <h1>Events {props.events ? props.events.map((el: any) => (<h3>{el}</h3>)) : []}</h1>
         <h1>Status {props.status}</h1>
       </div>
 

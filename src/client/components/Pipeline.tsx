@@ -23,7 +23,7 @@ export const Pipeline: React.FC = (props: any) => {
       console.log(response, 'data');
 
       // SETS JOBS STATE (REDUX) TO THE DATA RECEIVED FROM BACKEND
-      dispatch(actions.setPipeline(response));
+      dispatch(actions.setPipeline(response.pipeline));
     }
     test();
   }, []);
