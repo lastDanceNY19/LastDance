@@ -4,7 +4,7 @@ const userController = {};
 
 userController.createUser = (req, res, next) => {
   const { username, password } = req.body;
-  const registerQuery = `INSERT INTO "User"(username, password, num_apps, num_acceptances) VALUES ('${username}', '${password}', 0, 0);)`;
+  const registerQuery = `INSERT INTO "User"(username, password, num_apps, num_acceptances) VALUES ('${username}', '${password}', 0, 0);`;
 
   db.query(registerQuery, (err, data) => {
     if (err) {

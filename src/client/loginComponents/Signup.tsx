@@ -8,7 +8,6 @@ export const signUp = (props: any) => {
   const history = useHistory();
   const username = useRef(null);
   const password = useRef(null);
-  let errorMessage = '';
 
   async function handleSubmitButton(e: any) {
     e.preventDefault();
@@ -16,7 +15,10 @@ export const signUp = (props: any) => {
     await axios.post('/create_user', {
       username: username.current.value,
       password: password.current.value,
-    }).then(() => history.push('/pipeline'))
+    }).then((response: any) => { 
+        if (response.status === 200) history.push('/pipeline');
+        else alert("there was an error creating your account")
+      })
       .catch((error: any) => { 
         console.log('error ', error)
       })
