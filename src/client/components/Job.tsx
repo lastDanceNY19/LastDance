@@ -10,6 +10,14 @@ export const Job = (props: any) => {
 
   function openForm() {}
 
+  function onAccept() {
+    props.addEvent(props.id, '', 'Accepted');
+  }
+
+  function onReject() {
+    props.addEvent(props.id, '', 'Rejected');
+  }
+
   return (
     <div>
       <div>
@@ -31,17 +39,17 @@ export const Job = (props: any) => {
         <button type="submit">Add Event</button>
       </form>
 
-      <button onClick={openForm}> Add Event </button>
-      <button> Accepted </button>
-      <button> Rejected </button>
+      {/* <button onClick={openForm}> Add Event </button> */}
+      <button onClick={onAccept}> Accepted </button>
+      <button onClick={onReject}> Rejected </button>
     </div>
   );
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    addEvent: (id: any, eventName: any) => {
-      dispatch(actions.addEvent(id, eventName));
+    addEvent: (id: any, eventName: any, statusName: any) => {
+      dispatch(actions.addEvent(id, eventName, statusName));
     },
   };
 };

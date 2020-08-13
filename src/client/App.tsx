@@ -19,6 +19,7 @@ const App: React.FC = () => {
         <Route path="/signup">
           <Signup />
         </Route>
+        
         <Route path="/">
           <Main />
         </Route>

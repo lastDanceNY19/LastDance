@@ -8,7 +8,6 @@ const defaultState = {
   title: 'Test App',
 };
 
-
 function reducer(state = defaultState, action) {
   // let jobList;
   let groupList;
@@ -21,7 +20,7 @@ function reducer(state = defaultState, action) {
         company: action.payload,
         events: [],
         status: 'pending',
-        id: state.idJob
+        id: state.idJob,
       };
 
       let jobList = state.jobs.slice();
@@ -30,51 +29,44 @@ function reducer(state = defaultState, action) {
       return {
         ...state,
         jobs: jobList,
-          idJob: state.idJob + 1
+        idJob: state.idJob + 1,
       };
 
     case 'ADD_EVENT':
-
-      let newJobList = JSON.parse(JSON.stringify(state.jobs))
+      let newJobList = JSON.parse(JSON.stringify(state.jobs));
 
       newJobList.forEach((el) => {
         if (el.id === action.payload) {
-          el.events.push(action.event)
+          if (action.event.length > 0) {
+            el.events.push(action.event);
+          }
+          console.log('action status', actions.status);
+          if (action.status) {
+            console.log(el, 'current element', 'status', action.status);
+            el.status = action.status;
+          }
         }
-      })
+      });
 
-
-
-
-
-      // const mapped = newJobList.map((el) => {
-      //   if (el.id === action.payload) {
-      //     // return el.events.push(action.event)
-      //     return [...el.events, action.event]
-      //   } else {
-      //     return el;
-      //   }
-      // })
-
-      console.log(state, 'state', newJobList, 'job list')
+ 
+      console.log(state, 'state', newJobList, 'job list');
 
       return {
         ...state,
-        jobs: newJobList
+        jobs: newJobList,
       };
-
 
     case 'SET_PIPELINE': {
       return {
         ...state,
-        jobs: action.payload
+        jobs: action.payload,
       };
     }
 
     case 'SET_GROUPS': {
       return {
         ...state,
-        groups: action.payload
+        groups: action.payload,
       };
     }
 
@@ -83,6 +75,7 @@ function reducer(state = defaultState, action) {
   }
 }
 
+// ignore bottom two functions
 export const addApplication = () => (dispatch, getState) => {
   const jobs = getState().jobs;
   fetch('/add_application', {
