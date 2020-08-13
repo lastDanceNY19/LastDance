@@ -10,7 +10,7 @@ export const Pipeline: React.FC = (props: any) => {
   const dispatch = useDispatch();
   const [view, setView] = useState(true);
 
-  // make the request to the backend for pipeline info
+  // GETS DATA FROM BACKEND
   useEffect(() => {
     async function test() {
       let response = await fetch('/get_pipeline')
@@ -20,8 +20,7 @@ export const Pipeline: React.FC = (props: any) => {
         })
         .catch((error) => console.log('error ', error));
 
-      console.log('response from fetch req in Pipeline component ', response);
-      // dispatch(getPipeline())
+      // SETS JOBS STATE (REDUX) TO THE DATA RECEIVED FROM BACKEND
       dispatch(actions.setPipeline(response));
     }
     test();
@@ -50,6 +49,7 @@ export const Pipeline: React.FC = (props: any) => {
       <button onClick={clickPipeline}>Pipeline</button>
       <button onClick={clickHistory}>History</button>
 
+      {/* IF VIEW IS TRUE, RENDER FIRST DIV, IF IT IS FALSE, WE RENDER SECOND DIV */}
       {view ? (
         <div>
           <form
@@ -57,11 +57,8 @@ export const Pipeline: React.FC = (props: any) => {
               e.preventDefault();
               // form input
               let company = nameEl.current.value;
-              console.log(company, 'input company name');
               addApp(company);
-
               props.addJob(company);
-              console.log(props.jobs);
             }}
           >
             <label>Company Name: </label>
@@ -94,7 +91,6 @@ export const Pipeline: React.FC = (props: any) => {
 };
 
 const mapStateToProps = (state: any) => {
-  console.log(state, 'state');
   return {
     jobs: state.jobs,
   };

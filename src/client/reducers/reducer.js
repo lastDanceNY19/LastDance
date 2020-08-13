@@ -1,7 +1,6 @@
 import * as actions from '../actions/actions';
 
 const defaultState = {
-  // jobs: [{company: 'Amazon', events: ['phone screen 7/3'], status: true}],
   jobs: [],
   groups: [],
   idJob: 10000,
@@ -12,10 +11,9 @@ function reducer(state = defaultState, action) {
   // let jobList;
   let groupList;
 
+  // ADDS JOB APPLICATION
   switch (action.type) {
     case 'ADD_JOB':
-      // console.log(action.company)
-
       const newJob = {
         company: action.payload,
         events: [],
@@ -32,6 +30,7 @@ function reducer(state = defaultState, action) {
         idJob: state.idJob + 1,
       };
 
+    // ADD EVENT/UPDATE STATUS
     case 'ADD_EVENT':
       let newJobList = JSON.parse(JSON.stringify(state.jobs));
 
@@ -40,16 +39,12 @@ function reducer(state = defaultState, action) {
           if (action.event.length > 0) {
             el.events.push(action.event);
           }
-          console.log('action status', actions.status);
+
           if (action.status) {
-            console.log(el, 'current element', 'status', action.status);
             el.status = action.status;
           }
         }
       });
-
- 
-      console.log(state, 'state', newJobList, 'job list');
 
       return {
         ...state,
@@ -75,7 +70,7 @@ function reducer(state = defaultState, action) {
   }
 }
 
-// ignore bottom two functions
+// ignore bottom two functions, was trying to implement redux thunk but it is not needed
 export const addApplication = () => (dispatch, getState) => {
   const jobs = getState().jobs;
   fetch('/add_application', {

@@ -5,10 +5,8 @@ import * as actions from '../actions/actions';
 
 export const Job = (props: any) => {
   const eventEl = useRef(null);
-
-  // const result = useSelector(state => state.jobs)
-
   function openForm() {}
+
 
   function onAccept() {
     props.addEvent(props.id, '', 'Accepted');
@@ -30,7 +28,6 @@ export const Job = (props: any) => {
         onSubmit={(e) => {
           e.preventDefault();
           let eventName = eventEl.current.value;
-          console.log(props.id, 'props id Job component');
           props.addEvent(props.id, eventName);
         }}
       >
