@@ -7,7 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, './src/build'),
     filename: 'bundle.js',
   },
-  mode:  process.env.NODE_ENV,
+  mode: process.env.NODE_ENV,
   devServer: {
     publicPath: 'http://localhost:8080/build/',
     proxy: {
@@ -18,8 +18,7 @@ module.exports = {
     hot: true
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.tsx?$/,
         exclude: path.resolve(__dirname, 'node_modules/'),
         use: 'ts-loader',

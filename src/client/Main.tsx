@@ -4,12 +4,12 @@ import './styles/main.scss'
 export const Main = (props: any) => {
   const history = useHistory();
 
-  function sendToSignup (){
-    history.push('/signup')
+  function sendToSignup() {
+    history.push('/signup');
   }
 
-  function sendToLogin (){
-    history.push('/login')
+  function sendToLogin() {
+    history.push('/login');
   }
 
   return(

@@ -1,95 +1,109 @@
-import React , { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Job from './Job';
-import { connect, useSelector, useDispatch} from 'react-redux'
-import getPipeline from '../reducers/reducer'
+import { connect, useSelector, useDispatch } from 'react-redux';
+import getPipeline from '../reducers/reducer';
 
 import * as actions from '../actions/actions';
 
 export const Pipeline: React.FC = (props: any) => {
-  const nameEl = useRef(null)
-  const dispatch = useDispatch()
+  const nameEl = useRef(null);
+  const dispatch = useDispatch();
+  const [view, setView] = useState(true);
 
-   // make the request to the backend for pipeline info
+  // GETS DATA FROM BACKEND
   useEffect(() => {
-    async function test () {
-      let response = await fetch('/get_pipeline')
-      .then(res => res.json())
-      .then((data) => {
-        console.log(data)
-        return data;
-      })
-      .catch(error => console.log("error ", error));
-      
-      // dispatch(getPipeline())
-      dispatch(actions.setPipeline(response))
+    async function test() {
+      let response = await fetch('/get_pipeline?userId=1')
+        .then((res) => res.json())
+        .then((data) => {
+          return data;
+        })
+        .catch((error) => console.log('error ', error));
+
+      console.log(response, 'data');
+
+      // SETS JOBS STATE (REDUX) TO THE DATA RECEIVED FROM BACKEND
+      dispatch(actions.setPipeline(response));
     }
-    test()
-  },[])
+    test();
+  }, []);
 
-  // make the request to the backend for pipeline info
-  // const getPipeline = () => async (dispatch, getState) => {
-  //   console.log('getting pipeline')
-  //   const pipeline = await fetch('/get_pipeline').then(res => res.json())
-  //   dispatch(actions.setPipeline(pipeline))
-  // }
-
-  function addApp (name: string) {
+  function addApp(name: string) {
     fetch('/add_application', {
       method: 'POST',
       body: JSON.stringify({ name: name }),
-      headers: { 'Content-Type': 'application/json' }
-    })
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
+  // fire off the set_pipeline action
 
-  // fire off the set_pipeline action 
+  const clickPipeline = () => {
+    setView(true);
+  };
+
+  const clickHistory = () => {
+    setView(false);
+  };
 
   return (
     <div>
-        <button>Pipeline</button> 
-        <button>History</button> 
+      <button onClick={clickPipeline}>Pipeline</button>
+      <button onClick={clickHistory}>History</button>
 
-        <form onSubmit={(e) => {
-          e.preventDefault()
-          
-          let company = nameEl.current.value
-
-          addApp(company)
-          let userId = 1
-          props.addJob(userId, company)
-          console.log(props.jobs)
-        }}>
-          <label>Company Name: </label>
-          <input type="text" ref={nameEl}></input>
-          <button type='submit'>Add Application</button>
-        </form>
-
-        {console.log(props.jobs,'state')}
-
-        {props.jobs.map((el:any) => (
-          <Job company={el.company} events={el.events}/>
-        ))}
+      {/* IF VIEW IS TRUE, RENDER FIRST DIV, IF IT IS FALSE, WE RENDER SECOND DIV */}
+      {view ? (
+        <div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              // form input
+              let company = nameEl.current.value;
+              addApp(company);
+              props.addJob(company);
+            }}
+          >
+            <label>Company Name: </label>
+            <input type="text" ref={nameEl}></input>
+            <button type="submit">Add Application</button>
+          </form>
+          {props.jobs &&
+            props.jobs.map((el: any) => {
+              if (el.status === 'pending') {
+                return (
+                  <Job company={el.company} events={el.events} status={el.status} id={el.id}></Job>
+                );
+              }
+            })}
+        </div>
+      ) : (
+        <div>
+          {props.jobs &&
+            props.jobs.map((el: any) => {
+              if (el.status !== 'pending') {
+                return (
+                  <Job company={el.company} events={el.events} status={el.status} id={el.id}></Job>
+                );
+              }
+            })}
+        </div>
+      )}
     </div>
   );
 };
 
 const mapStateToProps = (state: any) => {
-  console.log(state, 'state')
   return {
-    jobs: state.jobs
-  }
-}
+    jobs: state.jobs,
+  };
+};
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    addJob: (e: any, company: any) => {
-      dispatch(actions.addJob(e, company))
-    }
-  }
-}
-
+    addJob: (company: any) => {
+      dispatch(actions.addJob(company));
+    },
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pipeline);
-
-
-

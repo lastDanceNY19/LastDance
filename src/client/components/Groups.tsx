@@ -1,6 +1,6 @@
-import React , { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Group from './Group';
-import { connect, useSelector, useDispatch} from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 
 import * as actions from '../actions/actions';
 
@@ -9,7 +9,7 @@ export const Groups = (props: any) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function test () {
+    async function test() {
       let response = await fetch('/get_groups')
       .then(res => res.json())
       .then((data) => {
@@ -18,22 +18,22 @@ export const Groups = (props: any) => {
       .catch(error => console.log("error ", error));
       dispatch(actions.setGroups(response))
     }
-    test()
-  },[])
+    test();
+  }, []);
 
-  return(
+  return (
     <div>
-        {props.groups.map((el:any) => (
-          <Group group={el.name} users={el.users}/>
-        ))}
+      {props.groups.map((el: any) => (
+        <Group group={el.name} users={el.users} />
+      ))}
     </div>
   );
 };
 
 const mapStateToProps = (state: any) => {
   return {
-    groups: state.groups
-  }
-}
+    groups: state.groups,
+  };
+};
 
 export default connect(mapStateToProps)(Groups);
