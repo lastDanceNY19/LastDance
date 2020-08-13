@@ -1,12 +1,10 @@
 import React from 'react';
-import Pipeline from './components/Pipeline'
-import Groups from './components/Groups'
-import { connect} from 'react-redux'
+import Pipeline from './components/Pipeline';
+import Groups from './components/Groups';
+import { connect } from 'react-redux';
 
 export const Container = (props: any) => {
-  
-
-  return(
+  return (
     <div>
       <div className='navbar'>
         <h1>Number of Jobs Applied: 'insert num off of redux store' </h1>
@@ -15,17 +13,17 @@ export const Container = (props: any) => {
       </div>
 
       <div className='main-container'>
-        <Pipeline />
+        <Pipeline userId={props.userId} />
         <Groups />
       </div>
     </div>
   );
 };
 
-const mapStateToProps  = (state: any) => {
+const mapStateToProps = (state: any) => {
   return {
-    title : state.title 
-  }
-}
+    title: state.title,
+  };
+};
 
 export default connect(mapStateToProps)(Container);
