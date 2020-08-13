@@ -3,13 +3,15 @@ const db = require('../models/userModel');
 const feedController = {};
 
 feedController.getPipeline = (req, res, next) => {
-  const retrievePipelineQuery = ``;
+  const { userId } = req.query;
+  const retrievePipelineQuery = `SELECT company, active, steps FROM Pipeline WHERE user_id=$1;`;
+  const values = [userId];
 
-  db.query(retrievePipelineQuery, (err, data) => {
+  db.query(retrievePipelineQuery, values, (err, data) => {
     if (err) {
       throw new Error(err);
     } else {
-      // add logic for handling retrieving user pipeline
+      res.locals.pipeline = data.rows;
       console.log('Pipeline has been successfully retrieved.');
       return next();
     };
@@ -17,17 +19,19 @@ feedController.getPipeline = (req, res, next) => {
 };
 
 feedController.getGroups = (req, res, next) => {
-  const retrieveGroupsQuery = ``;
+  const { userId } = req.query;
+  const retrieveGroupsQuery = `SELECT "Group".name FROM "Group" LEFT JOIN User_Group ON _id=group_id WHERE user_id=$1;`;
+  const values = [userId];
 
-  db.query(retrieveGroupsQuery, (err, data) => {
+  db.query(retrieveGroupsQuery, values, (err, data) => {
     if (err) {
       throw new Error(err);
     } else {
-      // add logic for handling retrieving user groups
+      res.locals.groups = data.rows;
       console.log('Groups have been retrieved successfully.');
       return next();
     };
   });
 };
 
-module.exports = feedController ;
+module.exports = feedController;

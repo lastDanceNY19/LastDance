@@ -9,6 +9,7 @@ import Main from './Main';
 const App: React.FC = () => {
   return (
     <Router>
+     
       <Switch>
         <Route path="/pipeline">
           <Container />
@@ -24,6 +25,7 @@ const App: React.FC = () => {
           <Main />
         </Route>
       </Switch>
+    
     </Router>
   );
 };

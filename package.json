@@ -10,6 +10,7 @@
     "tsc": "tsc",
     "build": "NODE_ENV=production webpack",
     "dev": "concurrently \"NODE_ENV=development webpack-dev-server --open\"  \"node src/server/server.js\"",
+    "devB": "NODE_ENV=development webpack-dev-server --open",
     "start": "node src/server/server.js"
   },
   "repository": {
@@ -25,6 +26,7 @@
   "dependencies": {
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
+    "axios": "^0.19.2",
     "cookie-parser": "^1.4.5",
     "eslint": "^7.6.0",
     "express": "^4.17.1",

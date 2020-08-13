@@ -11,15 +11,12 @@ export const Groups = (props: any) => {
   useEffect(() => {
     async function test() {
       let response = await fetch('/get_groups')
-        .then((res) => res.json())
-        .then((data) => {
-          console.log('response in groups ', data);
-          return data;
-        })
-        .catch((error) => console.log('error ', error));
-      console.log('response from fetch req in Groups component ', response);
-
-      dispatch(actions.setGroups(response));
+      .then(res => res.json())
+      .then((data) => {
+        return data;
+      })
+      .catch(error => console.log("error ", error));
+      dispatch(actions.setGroups(response))
     }
     test();
   }, []);

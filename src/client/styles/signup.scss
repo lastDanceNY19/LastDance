@@ -1,0 +1,13 @@
+.Signup {
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+    form {
+      button{
+        margin-top: 20px;
+      }
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+    }
+  }
