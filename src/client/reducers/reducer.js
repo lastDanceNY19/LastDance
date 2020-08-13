@@ -35,7 +35,6 @@ function reducer(state = defaultState, action) {
 
     case 'ADD_EVENT':
 
-
       let newJobList = JSON.parse(JSON.stringify(state.jobs))
 
       newJobList.forEach((el) => {
