@@ -4,6 +4,7 @@ const feedController = {};
 
 feedController.getPipeline = (req, res, next) => {
   const { user_id } = req.query;
+  console.log("user id coming in is ", user_id)
   const retrievePipelineQuery = `SELECT company, active, steps FROM Pipeline WHERE user_id=${parseInt(user_id)};`;
 
   db.query(retrievePipelineQuery, (err, data) => {

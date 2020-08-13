@@ -1,9 +1,13 @@
 .Login {
-display: flex;
-justify-content: center;
-margin-top: 150px;
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+  text-align: center;
   form {
-    button{
+    input {
+      margin-top: 10px;
+    }
+    button {
       margin-top: 20px;
     }
     display: flex;
